@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+  <h3>wishlist Items</h3>
+
+  {% if cart %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product Title</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>
+              <button type="button" class="btn btn-danger btn-sm" onclick="removeItem(this)">Remove</button>
+                <button type="button" class="btn btn-success"  onclick="alert('Your Order is successfully placed !!!')">Checkout</button>
+
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Your wishlist is empty.</p>
+  {% endif %}
+
+  <script>
+    function removeItem(button) {
+      // Get the parent row of the button
+      const row = button.parentNode.parentNode;
+
+      // Remove the row from the table
+      row.parentNode.removeChild(row);
+
+      // Update the cart total (if applicable)
+      // ...
+    }
+  </script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}index page{% endblock %}
+
+{% block content %}
+
+
+     <div class="hero-sec"></div>
+        <div class="shop">
+            <div class="boxi1 boxi">
+                <div class="box-con">
+                   <div class="best">
+                    <h1>Best Of</h1>
+                     <h1>Electronics</h1>
+                     <div class="view">
+                        <button>View All</button>
+                     </div>
+                   </div>
+                </div>
+            </div>
+            <div class="boxi">
+                <div class="printer">
+                    <div class="box-img" style="background-image: url('../static/images/printer.webp');"></div>
+                    <p id="tag">Printers</p>
+                    <p id="rate"> From ₹3000</p>
+                </div>
+            </div>
+            <div class="boxi">
+                <div class="Monitor">
+                    <div class="box-img" style="background-image: url('../static/images/monitor.webp');"></div>
+                    <p id="tag">Monitors</p>
+                    <p id="rate"> From ₹6599</p>
+                </div>
+            </div>
+            <div class="boxi">
+                <div class="project">
+                    <div class="box-img" style="background-image: url('../static/images/project.webp');"></div>
+                    <p id="tag">Projectors</p>
+                    <p id="rate"> From ₹9999</p>
+                </div>
+            </div>
+            <div class="boxi2 boxi">
+                <div class="Trimmers">
+                    <div class="box-img" style="background-image: url('../static/images/trimmer.webp');"></div>
+                    <p id="tag">Trimmers</p>
+                    <p id="rate"> From ₹399</p>
+                </div>
+            </div>
+        </div>
+<div class="Trimmers"></div>
+<br><br><br><br>
+<center><h1>List of All Products</h1></center>
+<div class="row">
+{% for product in products %}
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h3 class="card-title">{{ product.name }}</h3>
+<!--        <p class="card-text">{{ product.desc }}</p>-->
+        <p class="card-text">Price: RS.{{ product.price }}</p>
+        <p class="card-text">Stock: {{ product.stock }}</p>
+
+        <form action="/add_to_cart" method="post">
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+                <button type="submit" class="btn btn-primary" onclick="alert('Item Added successfully to cart')">Add to Cart</button>
+        </form>
+        <form action="/add_to_wishlist" method="post">
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <button type="submit" class="btn btn-warning" onclick="alert('Item Added successfully to wishlist')">Add to wishlist</button>
+        </form>
+      </div>
+    </div>
+{% endfor %}
+{% endblock %}
